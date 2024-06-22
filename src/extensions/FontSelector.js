@@ -1,5 +1,4 @@
 import { Extension } from '@tiptap/core';
-import { TextStyle } from '@tiptap/extension-text-style';  // Import TextStyle extension
 
 const FontSelector = Extension.create({
   name: 'fontSelector',

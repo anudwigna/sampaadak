@@ -12,7 +12,6 @@ import './styles/sampaadak-image.css';
 
 class SampaadakEditor {
   constructor(element, options = {}) {
-    // Create the editor
     this.editor = new Editor({
       element,
       extensions: [
@@ -25,14 +24,12 @@ class SampaadakEditor {
         }),
         ImageResize,
         TextStyle.configure({
-          fontFamily: 'Arial, sans-serif', // Set default font
+          fontFamily: 'Arial, sans-serif',
         }),
         ...(options.extensions || [])
       ],
       content: options.content || '<p style="font-family: Arial, sans-serif;">Initial content</p>'
     });
-
-    // Create the toolbar
     this.createToolbar(element);
   }
 
@@ -84,7 +81,6 @@ class SampaadakEditor {
       toolbar.appendChild(button);
     });
 
-    // Create dropdown button for Paragraph, Heading 1, and Heading 2
     const formatDropdown = document.createElement('div');
     formatDropdown.className = 'dropdown';
 

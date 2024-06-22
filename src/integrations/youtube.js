@@ -13,7 +13,7 @@ export function openYoutubeModal(editorInstance) {
   inputLabel.textContent = 'Enter YouTube Video URL:';
   const input = document.createElement('input');
   input.type = 'text';
-  input.value = 'https://www.youtube.com/embed/BfCIPsEGAS8?si=8HH41lQIc9EWw-UP';
+  input.value = '';
 
   // const widthLabel = document.createElement('label');
   // widthLabel.textContent = 'Width:';
