@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Tiptap Wrapper Test</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+  <div id="editor"></div>
+  <script src="./dist/bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const editorElement = document.getElementById('editor');
+      
+      // Use the global variable here
+      const myEditor = new SampaadakEditor.default(editorElement, {
+        content: '<p>Initial content</p>'
+      });
+
+      // You can add additional tests or methods here
+      console.log(myEditor.getContent());
+    });
+  </script>
+</body>
+</html>

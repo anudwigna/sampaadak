@@ -1,0 +1,85 @@
+.sampaadak-toolbar {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  background-color: #f5f5f5; /* Light grey background */
+  border-bottom: 1px solid #ddd; /* Slightly darker border */
+}
+
+.sampaadak-toolbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+  color: #333; /* Darker text color for better contrast */
+}
+
+.sampaadak-toolbar button:hover {
+  background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+.sampaadak-toolbar button .material-icons {
+  vertical-align: middle;
+}
+
+#editor {
+  border: 1px solid #ddd; /* Light grey border */
+  padding: 10px;
+  min-height: 200px;
+  margin-top: 10px;
+  background-color: #fff; /* White background for the editor */
+}
+
+#editor p {
+  margin: 0;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button */
+.dropdown-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  flex-direction: column;
+}
+
+.dropdown-content button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+.dropdown:hover .dropdown-button {
+  background-color: #e0e0e0;
+}

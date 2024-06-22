@@ -1,0 +1,39 @@
+{
+  "name": "sampaadak",
+  "version": "1.0.5",
+  "description": "A text editor based on Tip Tap",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "start": "http-server ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anudwigna/sampaadak.git"
+  },
+  "author": "Abhinandan Aryal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anudwigna/sampaadak/issues"
+  },
+  "dependencies": {
+    "@tiptap/core": "^2.0.0",
+    "@tiptap/extension-text-style": "^2.4.0",
+    "@tiptap/pm": "^2.0.0",
+    "@tiptap/starter-kit": "^2.0.0"
+  },
+  "homepage": "https://github.com/anudwigna/sampaadak#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^7.1.2",
+    "http-server": "^14.1.1",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
