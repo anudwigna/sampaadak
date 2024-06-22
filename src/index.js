@@ -1,7 +1,6 @@
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import TextStyle from '@tiptap/extension-text-style';
-//import CustomIframe from './extensions/CustomIframe';
 import Youtube from '@tiptap/extension-youtube';
 import { openYoutubeModal } from './integrations/youtube'; 
 import './styles/sampaadak.css';  
@@ -15,7 +14,6 @@ class SampaadakEditor {
       extensions: [
         StarterKit,
         Youtube,
-        //CustomIframe,
         TextStyle.configure({
           fontFamily: 'Arial, sans-serif', // Set default font
         }),

@@ -1,3 +1,7 @@
+.ProseMirror{
+  padding: 20px;
+}
+
 .sampaadak-toolbar {
   display: flex;
   gap: 5px;
@@ -84,3 +88,36 @@
 .dropdown:hover .dropdown-button {
   background-color: #e0e0e0;
 }
+
+/* CSS TO MAKE IFRAME RESPONSIVE */
+
+iframe {
+  min-width: 200px;
+  min-height: 200px;
+  display: block;
+  outline: 0px solid transparent;
+}
+
+div[data-youtube-video] > iframe {
+  cursor: move;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.ProseMirror-selectednode iframe {
+  transition: outline 0.15s;
+}
+
+@media only screen and (max-width: 480px) {
+  div[data-youtube-video] > iframe {
+    max-height: 50px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  div[data-youtube-video] > iframe {
+    max-height: 100px;
+  }
+}
+/* CSS TO MAKE IFRAME RESPONSIVE END */
+

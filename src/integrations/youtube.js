@@ -1,5 +1,3 @@
-import { setYoutubeVideo } from '@tiptap/extension-youtube';
-
 export function openYoutubeModal(editorInstance) {
   const modalOverlay = document.createElement('div');
   modalOverlay.className = 'modal-overlay';
@@ -17,10 +15,10 @@ export function openYoutubeModal(editorInstance) {
   input.type = 'text';
   input.value = 'https://www.youtube.com/embed/BfCIPsEGAS8?si=8HH41lQIc9EWw-UP';
 
-  const widthLabel = document.createElement('label');
-  widthLabel.textContent = 'Width:';
-  const widthInput = document.createElement('input');
-  widthInput.type = 'text';
+  // const widthLabel = document.createElement('label');
+  // widthLabel.textContent = 'Width:';
+  // const widthInput = document.createElement('input');
+  // widthInput.type = 'text';
 
   const heightLabel = document.createElement('label');
   heightLabel.textContent = 'Height:';
@@ -31,10 +29,10 @@ export function openYoutubeModal(editorInstance) {
   okButton.textContent = 'Ok';
   okButton.onclick = () => {
     const videoUrl = input.value.trim();
-    const width = widthInput.value.trim();
+    //const width = widthInput.value.trim();
     const height = heightInput.value.trim();
-    if (videoUrl && width && height) {
-      insertYoutubeVideo(editorInstance, videoUrl, width, height);
+    if (videoUrl && height) {
+      insertYoutubeVideo(editorInstance, videoUrl, height);
       modalOverlay.remove();
     }
   };
@@ -47,8 +45,8 @@ export function openYoutubeModal(editorInstance) {
 
   modalContent.appendChild(inputLabel);
   modalContent.appendChild(input);
-  modalContent.appendChild(widthLabel);
-  modalContent.appendChild(widthInput);
+  // modalContent.appendChild(widthLabel);
+  // modalContent.appendChild(widthInput);
   modalContent.appendChild(heightLabel);
   modalContent.appendChild(heightInput);
   modalContent.appendChild(okButton);
@@ -59,7 +57,7 @@ export function openYoutubeModal(editorInstance) {
   document.body.appendChild(modalOverlay);
 }
 
-export function insertYoutubeVideo(editorInstance, url, width, height) {
+export function insertYoutubeVideo(editorInstance, url, height) {
   //editorInstance.commands.setIframe({ src: url, width: width, height: height })
-  editorInstance.chain().focus().setYoutubeVideo({ src: url, width, height }).run();
+  editorInstance.chain().focus().setYoutubeVideo({ src: url, height: height }).run();
 }
