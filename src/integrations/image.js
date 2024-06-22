@@ -13,37 +13,37 @@ export function openImageModal(editorInstance) {
   fileInput.type = 'file';
   fileInput.accept = 'image/*';
 
-  const widthLabel = document.createElement('label');
-  widthLabel.textContent = 'Width:';
-  const widthInput = document.createElement('input');
-  widthInput.type = 'text';
+  const altLabel = document.createElement('label');
+  altLabel.textContent = 'Alt:';
+  const altInput = document.createElement('input');
+  altInput.type = 'text';
 
-  const heightLabel = document.createElement('label');
-  heightLabel.textContent = 'Height:';
-  const heightInput = document.createElement('input');
-  heightInput.type = 'text';
+  // const heightLabel = document.createElement('label');
+  // heightLabel.textContent = 'Height:';
+  // const heightInput = document.createElement('input');
+  // heightInput.type = 'text';
 
-  const alignLabel = document.createElement('label');
-  alignLabel.textContent = 'Alignment:';
-  const alignSelect = document.createElement('select');
-  const alignments = ['Left', 'Center', 'Right'];
-  alignments.forEach(alignment => {
-    const option = document.createElement('option');
-    option.value = alignment.toLowerCase();
-    option.textContent = alignment;
-    alignSelect.appendChild(option);
-  });
+  // const alignLabel = document.createElement('label');
+  // alignLabel.textContent = 'Alignment:';
+  // const alignSelect = document.createElement('select');
+  // const alignments = ['Left', 'Center', 'Right'];
+  // alignments.forEach(alignment => {
+  //   const option = document.createElement('option');
+  //   option.value = alignment.toLowerCase();
+  //   option.textContent = alignment;
+  //   alignSelect.appendChild(option);
+  // });
 
   const okButton = document.createElement('button');
   okButton.textContent = 'Ok';
   okButton.onclick = () => {
     const file = fileInput.files[0];
-    const width = widthInput.value.trim();
-    const height = heightInput.value.trim();
-    const alignment = alignSelect.value;
+    const alt = altInput.value.trim();
+    // const height = heightInput.value.trim();
+    // const alignment = alignSelect.value;
     
     if (file) {
-      uploadImage(editorInstance, file, width, height, alignment);
+      uploadImage(editorInstance, file, alt);
       modalOverlay.remove();
     }
   };
@@ -55,12 +55,12 @@ export function openImageModal(editorInstance) {
   };
 
   modalContent.appendChild(fileInput);
-  modalContent.appendChild(widthLabel);
-  modalContent.appendChild(widthInput);
-  modalContent.appendChild(heightLabel);
-  modalContent.appendChild(heightInput);
-  modalContent.appendChild(alignLabel);
-  modalContent.appendChild(alignSelect);
+  modalContent.appendChild(altLabel);
+  modalContent.appendChild(altInput);
+  // modalContent.appendChild(heightLabel);
+  // modalContent.appendChild(heightInput);
+  // modalContent.appendChild(alignLabel);
+  // modalContent.appendChild(alignSelect);
   modalContent.appendChild(okButton);
   modalContent.appendChild(cancelButton);
   modal.appendChild(modalContent);
@@ -69,16 +69,15 @@ export function openImageModal(editorInstance) {
   document.body.appendChild(modalOverlay);
 }
 
-function uploadImage(editorInstance, file, width = '', height = '', alignment = 'center') {
+function uploadImage(editorInstance, file, alt) {
   const reader = new FileReader();
   reader.onload = function(event) {
     const imageUrl = event.target.result;
-    insertImage(editorInstance, imageUrl, width, height, alignment);
+    insertImage(editorInstance, imageUrl, alt);
   };
   reader.readAsDataURL(file);
 }
 
-export function insertImage(editorInstance, url, width = '', height = '', alignment = 'center') {
-  console.log("INSERT_IMAGE_CALLED");
-  editorInstance.chain().focus().setImage({ src: url, alt: 'Image', width, height, alignment }).run();
+export function insertImage(editorInstance, url, alt) {
+  editorInstance.chain().focus().setImage({ src: url, alt: alt}).run();
 }
