@@ -20,7 +20,7 @@ const FontSelector = Extension.create({
   addCommands() {
     return {
       setFont: (font) => ({ chain }) => {
-        return chain().setAttributes('textStyle', { fontFamily: font }).run();  // Use `fontFamily` attribute
+        return chain().setAttributes('textStyle', { fontFamily: font }).run(); 
       },
     };
   },

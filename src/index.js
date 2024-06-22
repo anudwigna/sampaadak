@@ -2,9 +2,13 @@ import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import TextStyle from '@tiptap/extension-text-style';
 import Youtube from '@tiptap/extension-youtube';
+import Image from '@tiptap/extension-image';
+import ImageResize from 'tiptap-extension-resize-image';
 import { openYoutubeModal } from './integrations/youtube'; 
+import { openImageModal } from './integrations/image';
 import './styles/sampaadak.css';  
 import './styles/sampaadak-youtube.css';
+import './styles/sampaadak-image.css';
 
 class SampaadakEditor {
   constructor(element, options = {}) {
@@ -14,6 +18,12 @@ class SampaadakEditor {
       extensions: [
         StarterKit,
         Youtube,
+        Image.configure({
+          inline: true, 
+          resizable: true, 
+          alignable: true, 
+        }),
+        ImageResize,
         TextStyle.configure({
           fontFamily: 'Arial, sans-serif', // Set default font
         }),
@@ -54,14 +64,15 @@ class SampaadakEditor {
     const buttons = [
       { command: () => this.editor.commands.toggleBold(), label: 'Bold', icon: 'format_bold' },
       { command: () => this.editor.commands.toggleItalic(), label: 'Italic', icon: 'format_italic' },
-      { command: () => this.editor.commands.toggleUnderline(), label: 'Underline', icon: 'format_underline' },
+      //{ command: () => this.editor.commands.toggleUnderline(), label: 'Underline', icon: 'format_underline' },
       { command: () => this.editor.commands.toggleStrike(), label: 'Strike', icon: 'format_strikethrough' },
-      { command: () => this.editor.commands.toggleCode(), label: 'Code', icon: 'code' },
+      //{ command: () => this.editor.commands.toggleCode(), label: 'Code', icon: 'code' },
       { command: () => this.editor.commands.toggleBulletList(), label: 'Bullet List', icon: 'format_list_bulleted' },
       { command: () => this.editor.commands.toggleOrderedList(), label: 'Ordered List', icon: 'format_list_numbered' },
-      { command: () => this.editor.commands.toggleBlockquote(), label: 'Blockquote', icon: 'format_quote' },
+      //{ command: () => this.editor.commands.toggleBlockquote(), label: 'Blockquote', icon: 'format_quote' },
       { command: () => this.editor.commands.setHorizontalRule(), label: 'Horizontal Rule', icon: 'horizontal_rule' },
       { command: () => this.editor.commands.setHardBreak(), label: 'Hard Break', icon: 'keyboard_return' },
+      { command: () => openImageModal(this.editor), label: 'Insert Image', icon: 'image' }, 
       { command: () => openYoutubeModal(this.editor), label: 'Insert YouTube Video', icon: 'video_library' },
     ];
 
