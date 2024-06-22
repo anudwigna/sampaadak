@@ -24,12 +24,12 @@ export function openYoutubeModal(editorInstance) {
   heightLabel.textContent = 'Height:';
   const heightInput = document.createElement('input');
   heightInput.type = 'text';
+  heightInput.value = '500';
 
   const okButton = document.createElement('button');
   okButton.textContent = 'Ok';
   okButton.onclick = () => {
     const videoUrl = input.value.trim();
-    //const width = widthInput.value.trim();
     const height = heightInput.value.trim();
     if (videoUrl && height) {
       insertYoutubeVideo(editorInstance, videoUrl, height);
@@ -45,8 +45,6 @@ export function openYoutubeModal(editorInstance) {
 
   modalContent.appendChild(inputLabel);
   modalContent.appendChild(input);
-  // modalContent.appendChild(widthLabel);
-  // modalContent.appendChild(widthInput);
   modalContent.appendChild(heightLabel);
   modalContent.appendChild(heightInput);
   modalContent.appendChild(okButton);
@@ -58,6 +56,6 @@ export function openYoutubeModal(editorInstance) {
 }
 
 export function insertYoutubeVideo(editorInstance, url, height) {
-  //editorInstance.commands.setIframe({ src: url, width: width, height: height })
+  if(!height) height = 500;
   editorInstance.chain().focus().setYoutubeVideo({ src: url, height: height }).run();
 }
