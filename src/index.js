@@ -1,6 +1,11 @@
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
-import './styles/sampaadak.css';  // Import the CSS file
+import TextStyle from '@tiptap/extension-text-style';
+//import CustomIframe from './extensions/CustomIframe';
+import Youtube from '@tiptap/extension-youtube';
+import { openYoutubeModal } from './integrations/youtube'; 
+import './styles/sampaadak.css';  
+import './styles/sampaadak-youtube.css';
 
 class SampaadakEditor {
   constructor(element, options = {}) {
@@ -9,9 +14,14 @@ class SampaadakEditor {
       element,
       extensions: [
         StarterKit,
+        Youtube,
+        //CustomIframe,
+        TextStyle.configure({
+          fontFamily: 'Arial, sans-serif', // Set default font
+        }),
         ...(options.extensions || [])
       ],
-      content: options.content || ''
+      content: options.content || '<p style="font-family: Arial, sans-serif;">Initial content</p>'
     });
 
     // Create the toolbar
@@ -54,6 +64,7 @@ class SampaadakEditor {
       { command: () => this.editor.commands.toggleBlockquote(), label: 'Blockquote', icon: 'format_quote' },
       { command: () => this.editor.commands.setHorizontalRule(), label: 'Horizontal Rule', icon: 'horizontal_rule' },
       { command: () => this.editor.commands.setHardBreak(), label: 'Hard Break', icon: 'keyboard_return' },
+      { command: () => openYoutubeModal(this.editor), label: 'Insert YouTube Video', icon: 'video_library' },
     ];
 
     buttons.forEach(btn => {
@@ -65,33 +76,33 @@ class SampaadakEditor {
     });
 
     // Create dropdown button for Paragraph, Heading 1, and Heading 2
-    const dropdown = document.createElement('div');
-    dropdown.className = 'dropdown';
+    const formatDropdown = document.createElement('div');
+    formatDropdown.className = 'dropdown';
 
-    const dropdownButton = document.createElement('button');
-    dropdownButton.className = 'dropdown-button';
-    dropdownButton.innerHTML = 'Format <span class="material-icons">arrow_drop_down</span>';
-    dropdown.appendChild(dropdownButton);
+    const formatDropdownButton = document.createElement('button');
+    formatDropdownButton.className = 'dropdown-button';
+    formatDropdownButton.innerHTML = 'Format <span class="material-icons">arrow_drop_down</span>';
+    formatDropdown.appendChild(formatDropdownButton);
 
-    const dropdownContent = document.createElement('div');
-    dropdownContent.className = 'dropdown-content';
+    const formatDropdownContent = document.createElement('div');
+    formatDropdownContent.className = 'dropdown-content';
 
-    const dropdownButtons = [
+    const formatButtons = [
       { command: () => this.editor.commands.setParagraph(), label: 'Paragraph', icon: 'format_textdirection_l_to_r' },
       { command: () => this.editor.commands.toggleHeading({ level: 1 }), label: 'Heading 1', icon: 'looks_one' },
       { command: () => this.editor.commands.toggleHeading({ level: 2 }), label: 'Heading 2', icon: 'looks_two' },
     ];
 
-    dropdownButtons.forEach(btn => {
+    formatButtons.forEach(btn => {
       const button = document.createElement('button');
       button.innerHTML = `<span class="material-icons">${btn.icon}</span> ${btn.label}`;
       button.title = btn.label;
       button.onclick = btn.command;
-      dropdownContent.appendChild(button);
+      formatDropdownContent.appendChild(button);
     });
 
-    dropdown.appendChild(dropdownContent);
-    toolbar.appendChild(dropdown);
+    formatDropdown.appendChild(formatDropdownContent);
+    toolbar.appendChild(formatDropdown);
   }
 }
 

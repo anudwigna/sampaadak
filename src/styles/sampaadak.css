@@ -29,6 +29,7 @@
   min-height: 200px;
   margin-top: 10px;
   background-color: #fff; /* White background for the editor */
+  font-family: Arial, sans-serif; /* Set default font for the editor */
 }
 
 #editor p {

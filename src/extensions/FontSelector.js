@@ -1,4 +1,5 @@
 import { Extension } from '@tiptap/core';
+import { TextStyle } from '@tiptap/extension-text-style';  // Import TextStyle extension
 
 const FontSelector = Extension.create({
   name: 'fontSelector',
@@ -7,11 +8,11 @@ const FontSelector = Extension.create({
     return {
       defaultFont: 'Arial, sans-serif',
       fonts: [
-        { name: 'Arial', css: 'font-family: Arial, sans-serif;' },
-        { name: 'Courier New', css: 'font-family: Courier New, monospace;' },
-        { name: 'Georgia', css: 'font-family: Georgia, serif;' },
-        { name: 'Times New Roman', css: 'font-family: Times New Roman, serif;' },
-        { name: 'Verdana', css: 'font-family: Verdana, sans-serif;' },
+        { name: 'Arial', css: 'Arial, sans-serif' },
+        { name: 'Courier New', css: 'Courier New, monospace' },
+        { name: 'Georgia', css: 'Georgia, serif' },
+        { name: 'Times New Roman', css: 'Times New Roman, serif' },
+        { name: 'Verdana', css: 'Verdana, sans-serif' },
       ],
     };
   },
@@ -19,25 +20,9 @@ const FontSelector = Extension.create({
   addCommands() {
     return {
       setFont: (font) => ({ chain }) => {
-        return chain().setMark('textStyle', { style: font }).run();
+        return chain().setAttributes('textStyle', { fontFamily: font }).run();  // Use `fontFamily` attribute
       },
     };
-  },
-
-  addProseMirrorPlugins() {
-    return [
-      new Plugin({
-        props: {
-          handleDOMEvents: {
-            // Set default font style when the editor is created
-            create: () => {
-              this.editor.commands.setFont(this.options.defaultFont);
-              return false;
-            },
-          },
-        },
-      }),
-    ];
   },
 });
 

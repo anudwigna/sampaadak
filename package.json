@@ -1,13 +1,13 @@
 {
   "name": "sampaadak",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "A text editor based on Tip Tap",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
-    "start": "http-server ./test"
+    "start": "webpack --config webpack.config.js && http-server ./test"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@tiptap/core": "^2.0.0",
     "@tiptap/extension-text-style": "^2.4.0",
+    "@tiptap/extension-youtube": "^2.4.0",
     "@tiptap/pm": "^2.0.0",
     "@tiptap/starter-kit": "^2.0.0"
   },
