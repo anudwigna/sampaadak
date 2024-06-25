@@ -102,6 +102,7 @@ class SampaadakEditor {
       const button = document.createElement('button');
       button.innerHTML = `<span class="material-icons">${btn.icon}</span> ${btn.label}`;
       button.title = btn.label;
+      button.type = 'button';
       button.onclick = btn.command;
       formatDropdownContent.appendChild(button);
     });
