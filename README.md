@@ -29,17 +29,15 @@ Sure, here's an improved version of the instructions for running a demo of the e
 
 To see Sampaadak in action, you can run a demo included in the project. Follow these steps:
 
-1. Navigate to the `test` folder where you'll find an `index.html` file that runs the UMD version of the Sampaadak package for demonstration purposes.
-
-2. In the root directory of the project, run the following command to start the demo:
+1. In the root directory of the project, run the following command to start the demo:
 
 ```bash
 npm run start
 ```
 
-This command will bundle the package and place it inside the `dist` folder within the `test` directory.
+This command will bundle the package and place it inside the `dist` folder. Also, it will create an index.html file that will include this recently created bundle file. 
 
-3. Open the `index.html` file in your web browser to interact with the Sampaadak editor and explore its features.
+2. Open the `index.html` file in your web browser to interact with the Sampaadak editor and explore its features.
 
 Note: It uses `http-server` package to launch the webpage.
 

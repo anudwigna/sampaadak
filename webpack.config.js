@@ -1,14 +1,17 @@
 const path = require('path');
+const packageJson = require('./package.json');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/index.js', 
   output: {
-    path: path.resolve(__dirname, './test/dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: `bundle.${packageJson.version}.js`,
     library: 'SampaadakEditor',
     libraryTarget: 'umd', 
     globalObject: 'this', 
+    // minify: true
   },
   module: {
     rules: [
@@ -28,4 +31,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'test/index.html', 
+      filename: 'index.html', 
+      inject: 'body', 
+    })
+  ],
 };
