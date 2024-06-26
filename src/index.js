@@ -78,6 +78,7 @@ class SampaadakEditor {
       button.innerHTML = `<span class="material-icons">${btn.icon}</span>`;
       button.title = btn.label;
       button.onclick = btn.command;
+      button.setAttribute('type', 'button');
       toolbar.appendChild(button);
     });
 
@@ -100,9 +101,9 @@ class SampaadakEditor {
 
     formatButtons.forEach(btn => {
       const button = document.createElement('button');
-      button.innerHTML = `<span class="material-icons">${btn.icon}</span> ${btn.label}`;
-      button.title = btn.label;
-      button.type = 'button';
+      button.innerHTML = `<span class="material-icons gg">${btn.icon}</span> ${btn.label}`;
+      button.title = btn.label; 
+      button.setAttribute('type', 'button');
       button.onclick = btn.command;
       formatDropdownContent.appendChild(button);
     });
