@@ -6,12 +6,18 @@ import Image from '@tiptap/extension-image';
 import ImageResize from 'tiptap-extension-resize-image';
 import { openYoutubeModal } from './integrations/youtube'; 
 import { openImageModal } from './integrations/image';
+import {openDistractionFreeOverlay, closeDistractionFreeOverlay} from './integrations/distraction-free';
+
 import './styles/sampaadak.css';  
 import './styles/sampaadak-youtube.css';
 import './styles/sampaadak-image.css';
+import './styles/sampaadak-distractionfree.css';
 
 class SampaadakEditor {
   constructor(element, options = {}) {
+    //Distraction free mode flag
+    this.distractionFree = options.distractionFree || false;
+
     this.editor = new Editor({
       element,
       extensions: [
@@ -30,6 +36,7 @@ class SampaadakEditor {
       ],
       content: options.content || '<p style="font-family: Arial, sans-serif;">Initial content</p>'
     });
+
     this.createToolbar(element);
   }
 
@@ -39,10 +46,6 @@ class SampaadakEditor {
 
   destroy() {
     this.editor.destroy();
-  }
-
-  customMethod() {
-    console.log('This is a custom method');
   }
 
   setContent(content) {
@@ -59,18 +62,20 @@ class SampaadakEditor {
     containerElement.insertAdjacentElement('beforebegin', toolbar);
 
     const buttons = [
-      { command: () => this.editor.commands.toggleBold(), label: 'Bold', icon: 'format_bold' },
-      { command: () => this.editor.commands.toggleItalic(), label: 'Italic', icon: 'format_italic' },
+      { command: () => this.editor.commands.toggleBold(), label: 'Bold', icon: 'format_bold', name: 'bold'},
+      { command: () => this.editor.commands.toggleItalic(), label: 'Italic', icon: 'format_italic', name: 'italic'},
       //{ command: () => this.editor.commands.toggleUnderline(), label: 'Underline', icon: 'format_underline' },
-      { command: () => this.editor.commands.toggleStrike(), label: 'Strike', icon: 'format_strikethrough' },
+      { command: () => this.editor.commands.toggleStrike(), label: 'Strike', icon: 'format_strikethrough', name: 'strike'},
       //{ command: () => this.editor.commands.toggleCode(), label: 'Code', icon: 'code' },
-      { command: () => this.editor.commands.toggleBulletList(), label: 'Bullet List', icon: 'format_list_bulleted' },
-      { command: () => this.editor.commands.toggleOrderedList(), label: 'Ordered List', icon: 'format_list_numbered' },
+      { command: () => this.editor.commands.toggleBulletList(), label: 'Bullet List', icon: 'format_list_bulleted', name: 'bullet_list' },
+      { command: () => this.editor.commands.toggleOrderedList(), label: 'Ordered List', icon: 'format_list_numbered', name: 'ordered_list'},
       //{ command: () => this.editor.commands.toggleBlockquote(), label: 'Blockquote', icon: 'format_quote' },
-      { command: () => this.editor.commands.setHorizontalRule(), label: 'Horizontal Rule', icon: 'horizontal_rule' },
-      { command: () => this.editor.commands.setHardBreak(), label: 'Hard Break', icon: 'keyboard_return' },
-      { command: () => openImageModal(this.editor), label: 'Insert Image', icon: 'image' }, 
-      { command: () => openYoutubeModal(this.editor), label: 'Insert YouTube Video', icon: 'video_library' },
+      { command: () => this.editor.commands.setHorizontalRule(), label: 'Horizontal Rule', icon: 'horizontal_rule', name: 'horizontal_rule'},
+      { command: () => this.editor.commands.setHardBreak(), label: 'Hard Break', icon: 'keyboard_return', name: 'hard_break'},
+      { command: () => openImageModal(this.editor), label: 'Insert Image', icon: 'image', name: 'image'}, 
+      { command: () => openYoutubeModal(this.editor), label: 'Insert YouTube Video', icon: 'video_library', name: 'youtube'},
+      { command: () => openDistractionFreeOverlay(this.editor), label: 'Distraction Free', icon: 'fullscreen', name: 'distraction_free'},
+      { command: () => closeDistractionFreeOverlay(this.editor), label: 'Distraction Free Exit', icon: 'fullscreen_exit', name: 'distraction_free_exit'},
     ];
 
     buttons.forEach(btn => {
@@ -80,6 +85,14 @@ class SampaadakEditor {
       button.onclick = btn.command;
       button.setAttribute('type', 'button');
       toolbar.appendChild(button);
+
+      if(btn.name === 'distraction_free' && this.distractionFree) {
+        button.style.display = 'none';
+      }
+
+      if(btn.name === 'distraction_free_exit' && !this.distractionFree) {
+        button.style.display = 'none';
+      }
     });
 
     const formatDropdown = document.createElement('div');
