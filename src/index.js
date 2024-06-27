@@ -114,7 +114,7 @@ class SampaadakEditor {
 
     formatButtons.forEach(btn => {
       const button = document.createElement('button');
-      button.innerHTML = `<span class="material-icons gg">${btn.icon}</span> ${btn.label}`;
+      button.innerHTML = `<span class="material-icons">${btn.icon}</span> ${btn.label}`;
       button.title = btn.label; 
       button.setAttribute('type', 'button');
       button.onclick = btn.command;
