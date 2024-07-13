@@ -1,6 +1,6 @@
 {
   "name": "sampaadak",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A text editor based on Tip Tap",
   "main": "src/index.js",
   "module": "src/index.js",
