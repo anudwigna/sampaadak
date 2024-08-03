@@ -4,6 +4,10 @@ import TextStyle from '@tiptap/extension-text-style';
 import Youtube from '@tiptap/extension-youtube';
 import Image from '@tiptap/extension-image';
 import ImageResize from 'tiptap-extension-resize-image';
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 import { openYoutubeModal } from './integrations/youtube'; 
 import { openImageModal } from './integrations/image';
 import {openDistractionFreeOverlay, closeDistractionFreeOverlay} from './integrations/distraction-free';
@@ -12,6 +16,7 @@ import './styles/sampaadak.css';
 import './styles/sampaadak-youtube.css';
 import './styles/sampaadak-image.css';
 import './styles/sampaadak-distractionfree.css';
+import './styles/sampaadak-table.css';
 
 class SampaadakEditor {
   constructor(element, options = {}) {
@@ -29,6 +34,12 @@ class SampaadakEditor {
           alignable: true, 
         }),
         ImageResize,
+        Table.configure({
+          resizable: true,
+        }),
+        TableRow,
+        TableHeader,
+        TableCell,
         TextStyle.configure({
           fontFamily: 'Arial, sans-serif',
         }),
@@ -38,6 +49,7 @@ class SampaadakEditor {
     });
 
     this.createToolbar(element);
+    this.createTableToolbar(element);
   }
 
   getEditor() {
@@ -69,6 +81,7 @@ class SampaadakEditor {
       //{ command: () => this.editor.commands.toggleCode(), label: 'Code', icon: 'code' },
       { command: () => this.editor.commands.toggleBulletList(), label: 'Bullet List', icon: 'format_list_bulleted', name: 'bullet_list' },
       { command: () => this.editor.commands.toggleOrderedList(), label: 'Ordered List', icon: 'format_list_numbered', name: 'ordered_list'},
+      { command: () => this.editor.commands.toggleOrderedList(), label: 'Table', icon: 'tablet', name: 'table'},
       //{ command: () => this.editor.commands.toggleBlockquote(), label: 'Blockquote', icon: 'format_quote' },
       { command: () => this.editor.commands.setHorizontalRule(), label: 'Horizontal Rule', icon: 'horizontal_rule', name: 'horizontal_rule'},
       { command: () => this.editor.commands.setHardBreak(), label: 'Hard Break', icon: 'keyboard_return', name: 'hard_break'},
@@ -123,6 +136,32 @@ class SampaadakEditor {
 
     formatDropdown.appendChild(formatDropdownContent);
     toolbar.appendChild(formatDropdown);
+  }
+
+  createTableToolbar(containerElement) {
+    const tableToolbar = document.createElement('div');
+    tableToolbar.className = 'sampaadak-table-toolbar';
+    containerElement.insertAdjacentElement('beforebegin', tableToolbar);
+  
+    const tableButtons = [
+      { command: () => this.editor.commands.insertTable({ rows: 3, cols: 3, withHeaderRow: true }), label: 'Insert Table', icon: 'backup_table' },
+      { command: () => this.editor.commands.addColumnBefore(), label: 'Add Column Before', icon: 'west' },
+      { command: () => this.editor.commands.addColumnAfter(), label: 'Add Column After', icon: 'east' },
+      { command: () => this.editor.commands.deleteColumn(), label: 'Delete Column', icon: 'remove_circle' },
+      { command: () => this.editor.commands.addRowBefore(), label: 'Add Row Before', icon: 'arrow_circle_up' },
+      { command: () => this.editor.commands.addRowAfter(), label: 'Add Row After', icon: 'arrow_circle_down' },
+      { command: () => this.editor.commands.deleteRow(), label: 'Delete Row', icon: 'remove_circle_outline' },
+    ];
+  
+    tableButtons.forEach(btn => {
+      const button = document.createElement('button');
+      button.innerHTML = `<span class="material-icons">${btn.icon}</span>`;
+      button.title = btn.label;
+      button.onclick = btn.command;
+      button.setAttribute('type', 'button');
+      button.classList.add('table-toolbar-button');
+      tableToolbar.appendChild(button);
+    });
   }
 }
 
