@@ -15,13 +15,14 @@ import {openDistractionFreeOverlay, closeDistractionFreeOverlay} from './integra
 import { FontSize } from './extensions/FontSize';
 import { Color } from '@tiptap/extension-color';
 import Link from '@tiptap/extension-link';
-import { createLinkOverlay } from './integrations/link_bubble';
+import { createLinkOverlay } from './integrations/link';
 
 import './styles/sampaadak.css';  
 import './styles/sampaadak-youtube.css';
 import './styles/sampaadak-image.css';
 import './styles/sampaadak-distractionfree.css';
 import './styles/sampaadak-table.css';
+import './styles/sampaadak-link.css';
 
 class SampaadakEditor {
   constructor(element, options = {}) {
