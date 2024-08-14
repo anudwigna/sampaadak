@@ -15,7 +15,7 @@ export function openDistractionFreeOverlay(oldEditor) {
 
   const overlayEditor = new SampaadakEditor(editorContainer, { 
     content: oldEditor.getHTML(),
-    distractionFree: true
+    distractionFree: true,
   });
 
   document.body.appendChild(overlay);
